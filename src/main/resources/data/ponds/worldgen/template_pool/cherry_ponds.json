@@ -1,0 +1,24 @@
+{
+  "name": "ponds:cherry_ponds",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "ponds:cherry_pond_1",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "ponds:cherry_pond_2",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}
