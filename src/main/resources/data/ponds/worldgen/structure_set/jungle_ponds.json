@@ -8,15 +8,7 @@
   },
   "structures": [
     {
-      "structure": "ponds:cherry_pond_1",
-      "weight": 4
-    },
-    {
-      "structure": "ponds:cherry_pond_2",
-      "weight": 3
-    },
-    {
-      "structure": "ponds:cherry_pond_3",
+      "structure": "ponds:jungle_pond",
       "weight": 1
     }
   ]

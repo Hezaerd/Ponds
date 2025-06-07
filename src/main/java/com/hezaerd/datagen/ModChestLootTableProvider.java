@@ -26,7 +26,7 @@ public class ModChestLootTableProvider extends SimpleFabricLootTableProvider {
     @Override
     public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> lootTableBiConsumer) {
         lootTableBiConsumer.accept(ModLootTables.CHERRY_POND_BARREL, LootTable.builder()
-                // Pool 1: Music Disc (100% chance for one random disc from 5)
+                // Pool 1: Music Disc
                 .pool(
                         LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(1.0F)) // Guarantees one item from this pool
@@ -131,6 +131,104 @@ public class ModChestLootTableProvider extends SimpleFabricLootTableProvider {
                                                                 )
                                                         )
                                                 )
+                                )
+                )
+        );
+        
+        lootTableBiConsumer.accept(ModLootTables.DESERT_OASIS_BARREL, LootTable.builder()
+                // Pool 1: Music Discs
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F)) // Guarantees one item from this pool
+                                .with(ItemEntry.builder(Items.MUSIC_DISC_MALL).weight(4)) // 50%
+                                .with(ItemEntry.builder(Items.MUSIC_DISC_OTHERSIDE).weight(2)) // 25%
+                                .with(ItemEntry.builder(Items.MUSIC_DISC_RELIC).weight(1)) // 12.5%
+                                .with(ItemEntry.builder(Items.MUSIC_DISC_CREATOR).weight(1)) // 12.5%
+                )
+                // Pool 2: Gold Nuggets (guaranteed, multiple)
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F)) // Always rolls once
+                                .with(
+                                        ItemEntry.builder(Items.GOLD_NUGGET)
+                                                .apply(
+                                                        SetCountLootFunction.builder(
+                                                                UniformLootNumberProvider.create(
+                                                                        3.0F,
+                                                                        7.0F
+                                                                )
+                                                        )
+                                                ) // 3 to 7 nuggets
+                                )
+                )
+                // Pool 3: Emeralds (lower chance, fewer quantity)
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F))
+                                .conditionally(
+                                        RandomChanceLootCondition.builder(0.3F)
+                                ) // 30% chance to get emeralds
+                                .with(
+                                        ItemEntry.builder(Items.EMERALD)
+                                                .apply(
+                                                        SetCountLootFunction.builder(
+                                                                UniformLootNumberProvider.create(
+                                                                        1.0F,
+                                                                        2.0F
+                                                                )
+                                                        )
+                                                ) // 1 or 2 emeralds if successful
+                                )
+                )
+                // Pool 4: Empty Bucket (low chance, fixed quantity)
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F))
+                                .conditionally(
+                                        RandomChanceLootCondition.builder(0.2F)
+                                ) // 20% chance for a bucket
+                                .with(
+                                        ItemEntry.builder(Items.BUCKET)
+                                                .apply(
+                                                        SetCountLootFunction.builder(
+                                                                ConstantLootNumberProvider.create(1.0F)
+                                                        )
+                                                ) // Always 1 bucket if successful
+                                )
+                )
+                // Pool 5: Cobwebs (moderate chance, multiple)
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F))
+                                .conditionally(
+                                        RandomChanceLootCondition.builder(0.6F)
+                                ) // 60% chance for cobwebs
+                                .with(
+                                        ItemEntry.builder(Items.COBWEB)
+                                                .apply(
+                                                        SetCountLootFunction.builder(
+                                                                UniformLootNumberProvider.create(
+                                                                        1.0F,
+                                                                        3.0F
+                                                                )
+                                                        )
+                                                ) // 1 to 3 cobwebs if successful
+                                )
+                )
+                // Pool 6: Brush (very low chance, single)
+                .pool(
+                        LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1.0F))
+                                .conditionally(
+                                        RandomChanceLootCondition.builder(0.05F)
+                                ) // 5% chance for a brush
+                                .with(
+                                        ItemEntry.builder(Items.BRUSH)
+                                                .apply(
+                                                        SetCountLootFunction.builder(
+                                                                ConstantLootNumberProvider.create(1.0F)
+                                                        )
+                                                ) // Always 1 brush if successful
                                 )
                 )
         );
